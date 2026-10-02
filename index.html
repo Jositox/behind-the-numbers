@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101c30">
+  <meta name="description" content="A practical look at how dbt helps teams share, check and maintain the calculations behind their reports.">
+  <meta name="author" content="Jose">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Same data. But different answers?">
+  <meta property="og:description" content="What changes when reports share a calculation? A practical look at dbt, with a video demo.">
+  <meta property="og:image" content="https://jositox.github.io/behind-the-numbers/assets/video-poster.png">
+  <title>Same data. But different answers?</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header container">
+    <a class="blog-brand" href="#"><span class="brand-dot" aria-hidden="true"></span>Behind the Numbers</a>
+    <nav aria-label="Article navigation">
+      <a href="#story">Why dbt?</a>
+      <a href="#value">The value</a>
+      <a href="#video">Video</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">Same data.<br>But different<br><span>answers?</span></h1>
+        <div class="hero-stat">
+          <p>More than <strong>1 in 4 organizations</strong> estimate annual losses above <strong>$5 million</strong> from poor data quality.</p>
+          <a href="https://www.ibm.com/think/insights/cost-of-poor-data-quality" target="_blank" rel="noopener noreferrer">Source: IBM Think, citing Forrester <span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="read-link" href="#story">Explore the approach <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <div class="hero-explanation">
+        <p>The data hasn't changed. The question hasn't either. But when reports keep separate copies of a calculation, one can get updated while another keeps the old rule.</p>
+        <p class="hero-dbt-note">With dbt, reports can build on calculations the team maintains and checks in one place.</p>
+        <figure class="hero-workflow" aria-labelledby="workflow-caption">
+          <div class="hero-source">
+            <svg width="30" height="34" viewBox="0 0 30 34" fill="none" aria-hidden="true">
+              <ellipse cx="15" cy="7" rx="12" ry="5" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M3 7v19c0 2.8 5.4 5 12 5s12-2.2 12-5V7M3 16c0 2.8 5.4 5 12 5s12-2.2 12-5" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <strong>Same source data</strong>
+          </div>
+          <p class="workflow-question">“What were net sales this month?”</p>
+          <div class="hero-connectors" aria-hidden="true"><span></span><span></span></div>
+          <div class="hero-results">
+            <div class="hero-result finance">
+              <h2><span class="mini-dot" aria-hidden="true"></span>Finance report</h2>
+              <p>Separately maintained<br>calculation</p>
+              <strong>$1.24M</strong>
+            </div>
+            <div class="hero-result sales">
+              <h2><span class="mini-dot" aria-hidden="true"></span>Sales report</h2>
+              <p>Separately maintained<br>calculation</p>
+              <strong>$1.28M</strong>
+            </div>
+          </div>
+          <figcaption id="workflow-caption">
+            <strong>Same source. Same question. Different answers.</strong>
+            <span>Illustrative example of calculation drift.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <article class="article" aria-label="Why implement dbt">
+      <section class="reading-column example-section" id="story" aria-labelledby="solution-title">
+        <div class="example-copy">
+          <h2 id="solution-title">Keep the rule shared.<br>Let the reports build on it.</h2>
+          <p>Change how net sales is calculated, and every copy of that rule needs updating. Miss one, and someone has to explain why the reports no longer agree.</p>
+          <p>In dbt, the team can put that calculation in a model: a query that prepares data for other steps to use. Reports read from the shared results.</p>
+          <p>The team can add tests, explain the rules in documentation, and review changes in Git before using them in reporting.</p>
+        </div>
+        <figure class="project-workflow" aria-labelledby="project-caption">
+          <div class="figure-label">A shared foundation for reporting</div>
+          <div class="data-node">Source data</div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="shared-model">
+            <span class="model-brand">dbt</span>
+            <h3>Shared calculation</h3>
+            <p>Define the rule · Test it · Document it</p>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="report-pair">
+            <div class="report-node"><h3>Finance report</h3><p>Uses the shared model</p></div>
+            <div class="report-node"><h3>Sales report</h3><p>Uses the shared model</p></div>
+          </div>
+          <figcaption id="project-caption">Update the shared calculation, then rebuild the reports that depend on it.</figcaption>
+        </figure>
+      </section>
+
+      <section class="reading-column video-section" id="video" aria-labelledby="video-title">
+        <div class="video-copy">
+          <h2 id="video-title">See how it works.</h2>
+          <p>The demo starts with two queries that repeat the same sales calculation. Then we move it into a shared dbt model.</p>
+          <p>Watch both reports use that model, check that their totals agree, and see a test catch an intentionally invalid discount.</p>
+          <a class="read-link" href="https://github.com/Jositox/dbt-simple-challenge" target="_blank" rel="noopener noreferrer">Try a small dbt example <span aria-hidden="true">↗</span></a>
+        </div>
+        <figure class="video-figure">
+          <video controls playsinline preload="metadata" poster="assets/video-poster.png" aria-label="Demo of shared sales calculations and data tests with dbt">
+            <source src="assets/dbt_demo.mp4" type="video/mp4">
+            <p>Your browser cannot play this video. <a href="assets/dbt_demo.mp4">Open the demo video</a>.</p>
+          </video>
+          <figcaption>A walkthrough with dbt and MotherDuck. <a href="assets/dbt_demo.mp4">Open the video separately ↗</a></figcaption>
+        </figure>
+      </section>
+
+      <section class="reading-column benefits-section" id="value" aria-labelledby="benefits-title">
+        <div class="benefits-intro">
+          <h2 id="benefits-title">What changes for the business?</h2>
+          <p>Teams can write reusable SQL and tests without dbt. dbt brings that work into a project they can maintain as reporting grows.</p>
+        </div>
+        <div class="benefits-copy">
+          <div class="business-outcome">
+            <h3>Fewer copies to update</h3>
+            <p>A change to a shared calculation has fewer places to maintain and check.</p>
+          </div>
+          <div class="business-outcome">
+            <h3>Problems caught by defined checks</h3>
+            <p>Tests flag issues the team has chosen to check, such as duplicate orders or invalid discounts.</p>
+          </div>
+          <div class="business-outcome">
+            <h3>Less guesswork when numbers change</h3>
+            <p>The team can see the calculation, the reports that depend on it, and what changed.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reading-column closing" id="start" aria-labelledby="closing-title">
+        <div class="closing-intro">
+          <h2 id="closing-title">Start with one report that matters.</h2>
+          <p>I'd start with an existing process where several reports repeat the same calculation.</p>
+          <p>The team still has to agree on the rules and choose useful tests. A small pilot gives you a way to see whether dbt makes that work easier.</p>
+        </div>
+        <ol class="pilot-steps">
+          <li>
+            <strong>Agree on the rules.</strong>
+            <span>Decide what the metric means and which records count.</span>
+          </li>
+          <li>
+            <strong>Build and compare.</strong>
+            <span>Use a shared dbt model and check its results against the existing reports.</span>
+          </li>
+          <li>
+            <strong>See what improves.</strong>
+            <span>Does changing a rule take less work? Are the results easier to validate?</span>
+          </li>
+        </ol>
+        <p class="closing-takeaway">Use the pilot to decide where dbt belongs next.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="footer container">
+    <span>Behind the Numbers</span>
+    <p>By Jose · Data, reporting, and the work in between.</p>
+  </footer>
+</body>
+</html>
